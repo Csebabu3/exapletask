@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+       body{
+            text-align: center;
+            margin-top: 50px;
+            
+        }
+        input{
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid gray;
+            outline: none;
+            box-shadow: 3px 3px 5px gray;
+            width: 400px;
+        }
+        button{
+            color: white;
+            border-radius: 5px;
+            background-color: green;
+            padding: 8px;
+            cursor: pointer;
+            outline: none;
+            border: 0;
+            box-shadow: 3px 3px 5px gray;
+        }
+        h2{
+          color: blue;
+          font-weight: bolder;
+          font-family: arial;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="result"></div>
+    <h2>Flight tickets Booking</h2>
+<input id="fname" placeholder="enter a fname"><br><br>
+<input id="lname" placeholder="enter a last name"><br><br>
+<input id="email" placeholder="enter a dob"><br><br>
+<input type="text" id="pwd" placeholder="enter a pwd"><br><br>
+<input type="text" id="mobile" placeholder="enter a mobile"><br><br>
+<input type="text" id="flight" placeholder="enter a flight name"><br><br>
+<input type="text" id="flying" placeholder="from"><br><br>
+<input type="text" id="flying1" placeholder="To"><br><br>
+<button onclick="Submit()">Submit</button>
+<button onclick="Clear()">Clear</button>
+<button onclick="deleteData()">Delete Data</button>
+<br><br><br><br><br>
+<table id="table" class="table">
+  <tr>
+    <th>SL. NO</th>
+    <th>fName</th>
+    <th>lname</th>
+    <th>email</th>
+    <th>password</th>
+    <th>mobile</th>
+    <th>flight</th>
+    <th>flying</th>
+    <th>flying1</th>
+    <th></th>
+  </tr>
+  <tbody id="tbl_data">
+    
+   
+ 
+</tbody>
+</table>
+
+<script>
+var taskData = [];
+
+// Define a variable to keep track of the last inserted row index
+var lastRowIndex = null;
+
+// Function to submit the form data
+function Submit() {
+  // Get the form data
+  window.location();
+  var fname = document.getElementById('fname').value;
+  var lname = document.getElementById('lname').value;
+  var email = document.getElementById("email").value;
+  var pwd = document.getElementById("pwd").value;
+  var mobile = document.getElementById("mobile").value;
+  var flight = document.getElementById("flight").value;
+  var flying = document.getElementById("flying").value;
+  var flying1 = document.getElementById("flying1").value;
+
+
+  // Create a task object with the form data
+  const obj = {"fname": fname, "lname": lname, "email":email , "pwd":pwd , "mobile":mobile , "flight":flight , "flying":flying , "flying1":flying1};
+
+  // Add the task object to the taskData array
+  taskData.push(obj);
+
+  // Save the taskData array to local storage
+  localStorage.setItem("taskData", JSON.stringify(taskData));
+
+  // Update the task table
+  var table = document.getElementById("table");
+  var row = table.insertRow();
+  row.insertCell(0).innerHTML = taskData.length;
+  row.insertCell(1).innerHTML = fname;
+  row.insertCell(2).innerHTML = lname;
+  row.insertCell(3).innerHTML = email;
+  row.insertCell(4).innerHTML = pwd;
+  row.insertCell(5).innerHTML = mobile;
+  row.insertCell(6).innerHTML = flight;
+  row.insertCell(7).innerHTML = flying;
+  row.insertCell(8).innerHTML = flying1;
+  
+
+  // Update the lastRowIndex variable
+  lastRowIndex = table.rows.length - 1;
+}
+
+// Function to clear the table and local storage
+function Clear() {
+  localStorage.clear();
+  taskData = [];
+  lastRowIndex = null;
+  var table = document.getElementById("table");
+  table.deleteTBody();
+}
+
+// Function to load the task table from local storage
+function LoadTable() {
+  var storedData = JSON.parse(localStorage.getItem("taskData")) || [];
+  taskData = storedData;
+
+  var table = document.getElementById("table");
+  for (var i = 0; i < taskData.length; i++) {
+    var row = table.insertRow();
+    row.insertCell(0).innerHTML = i + 1;
+    row.insertCell(1).innerHTML = taskData[i].fname;
+    row.insertCell(2).innerHTML = taskData[i].lname;
+    row.insertCell(3).innerHTML = taskData[i].email;
+    row.insertCell(4).innerHTML = taskData[i].pwd;
+    row.insertCell(5).innerHTML = taskData[i].mobile;
+    row.insertCell(6).innerHTML = taskData[i].flight;
+    row.insertCell(7).innerHTML = taskData[i].flying;
+    row.insertCell(8).innerHTML = taskData[i].flying1;
+
+    // Update the lastRowIndex variable
+    lastRowIndex = table.rows.length - 1;
+  }
+}
+
+// Load the task table on page load
+window.onload = function() {
+  LoadTable();
+};
+function deleteData() {
+    localStorage.clear();
+}
+
+
+
+</script>
+
+</body>
+</html>

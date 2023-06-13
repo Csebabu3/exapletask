@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="result"></div>
+    <input id="fname"><br><br>
+    <input id="lname"><br><br>
+    <button onclick="submit()">submit</button>
+    <button onclick="clear()">clear</button>
+    <br><br>
+    <table id="table">
+        <tr>
+            <th>SL.No</th>
+            <th>fName</th>
+            <th>lname</th>
+            <th>dob</th>
+        </tr>
+        <tr id="tbl_data">
+
+        </tr>
+    </table>
+    <script>
+        var taskData = [];
+        var i = null;
+        function submit(){
+            if(taskData.length > 0){
+                var fname = document.getElementById("fname").value;
+                var lname = document.getElementById("lname").value;
+                const obj = {"fname":fname , "lname":lname}
+                var stored = JSON.parse(localStorage.getItem("task"));
+                stored.push(obj);
+            }
+                var fname = document.getElementById("fname").value;
+                var lname = document.getElementById("lname").value;
+                const obj = { "data": data , "date": date}
+                taskData.push(obj);
+
+                localStorage.setItem("task", JSON.stringify(taskData));
+                document.getElementById("result").innerHTML = localStorage.getItem("task");
+                if(i==null){
+            i= 0;
+        }
+        for ( i = i; i < taskData.length; ++i){
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            row.insertCell(0).innerHTML= i+1;
+            row.insertCell(1).innerHTML= taskData[i].fname;
+            row.insertCell(2).innerHTML= taskData[i].lname;
+            i=i;
+        }
+        }
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="result"></div>
+<input id="fname">
+<input id="lname">
+<input id="dob">
+<button onclick="Submit()">Submit</button>
+<button onclick="Clear()">Clear</button>
+<br><br><br><br><br>
+<table id="table">
+  <tr>
+    <th>SL. NO</th>
+    <th>fName</th>
+    <th>lname</th>
+    <th>dob</th>
+  </tr>
+  <tr id ="tbl_data">
+  </tr>
+
+</table>
+
+<script>
+// Check browser support
+
+var taskData = [];
+var i = null;
+function Submit(){
+    if(taskData.length > 0){
+        var fname = document.getElementById('fname').value;
+        var lname = document.getElementById('lname').value;
+        var dob = document.getElementById("dob").value;
+        const obj = { "fname": fname , "lname": lname , "dob": dob}
+        var stored = JSON.parse(localStorage.getItem("stored"));
+        stored.push(obj);
+        localStorage.setItem("task", JSON.stringify(taskData));
+    }
+    var data = document.getElementById('fname').value;
+    var date = document.getElementById('lname').value;
+    var dob = document.getElementById("dob").value;
+    const obj = { "fname": fname , "lname": lname , "dob": dob}
+    taskData.push(obj);
+
+    
+    localStorage.setItem("task", JSON.stringify(taskData));
+    document.getElementById("result").innerHTML = localStorage.getItem("task");
+    
+        if(i==null){
+            i= 0;
+        }
+    
+    for ( i = i; i < taskData.length; ++i) {
+    
+        var rowCount = table.rows.length;
+     var row = table.insertRow(rowCount);
+        row.insertCell(0).innerHTML= i+1;
+    row.insertCell(1).innerHTML= taskData[i].fname;
+    row.insertCell(2).innerHTML= taskData[i].lname;
+    row.insertCell(2).innerHTML= taskData[i].dob;
+    i=i;
+        
+    }
+    
+}
+  // Retrieve
+  
+</script>
+
+</body>
+</html>
+</body>
+</html>

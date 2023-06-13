@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table id="myTable">
+        <thead>
+          <tr>
+            <th>Value 1</th>
+            <th>Value 2</th>
+            <th>Sum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="number" id="value1"></td>
+            <td><input type="number" id="value2"></td>
+            <td><span id="sum"></span></td>
+          </tr>
+        </tbody>
+      </table>
+<script>
+    const value1Input = document.getElementById('value1');
+const value2Input = document.getElementById('value2');
+const sumSpan = document.getElementById('sum');
+
+function updateSum() {
+  const value1 = Number(value1Input.value);
+  const value2 = Number(value2Input.value);
+  const sum = value1 + value2;
+  sumSpan.textContent = sum;
+}
+
+value1Input.addEventListener('input', updateSum);
+value2Input.addEventListener('input', updateSum);
+
+</script>      
+</body>
+</html>
